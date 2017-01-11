@@ -1,106 +1,306 @@
 #include <time.h>
+#include <string.h>
 #include <stdio.h>
-char sathedadstresi[3];
-char date[20];
-void tarikh()
+char sathedastresi[3];
+char date[20],inputpasword[50],comand[50];
+char name[50],username[50],pasword[50],name2[50],username2[50],pasword2[50] = {},tarikh[20];
+//orginal username of user is username2
+void strnull(char str[])
 {
-	time_t time_raw_format;
-    struct tm * ptr_time;
-    char buffer[50];
+    int i;
+     for(i=0;str[i]!='\0';i++)
+        strcpy(&str[i],"\0") ;
 
-    time ( &time_raw_format );
-    ptr_time = localtime ( &time_raw_format );
-    if(strftime(buffer,50,"%Y.%m.%d",ptr_time) == 0){
-        perror("Couldn't prepare formatted string");
-    } else {
-        sprintf (date, buffer);
-       //printf("%s",date);
-    }
-	
-	
-	
 }
-void makeadmin()
-{
 
-	if (fopen("modirdetail.txt","r")==0)// if we have no modir and shoud be make modir
-	{
+
+void tarikhfunc(){
+	time_t time_raw_format;
+	struct tm * ptr_time;
+	char buffer[50];
+
+	time ( &time_raw_format );
+	ptr_time = localtime ( &time_raw_format );
+	if(strftime(buffer,50,"%Y.%m.%d",ptr_time) == 0) {
+		perror("Couldn't prepare formatted string");
+	} else {
+		sprintf (date, buffer);
+		//printf("%s",date);
+	}
+
+
+
+}
+
+
+
+
+void makeadmin() {
+
+	if (fopen("modirdetail.txt","r")==0) { // if we have no modir and shoud be make modir
 		printf("the program run in first time\nand have no admin\nPLESE inter admin name: ");
 		char name[50],username[50],pasword[50];
 		gets(name);
 		printf("plese inter admin user name: ");
 		gets(username);
-		printf("plese inter admin pasword: ");	
+		printf("plese inter admin pasword: ");
 		gets(pasword);
 		FILE * fp;
-		
-   		fp = fopen ("modirdetail.txt", "w");
- 	    fprintf(fp,"%s %s %s", name,username,pasword);
+
+		fp = fopen ("modirdetail.txt", "w");
+		fprintf(fp,"%s %s %s 0", name,username,pasword);
+		fclose(fp);
 	}
-	
-	
+
+
 
 }
 
-void login()
-{
-	
-	while(1)
-	{
-	
-	char name[50],username[50],pasword[50],name2[50],username2[50],pasword2[50],tarikh[50];
-	printf("plese inter your username and pasword to login\nuser name: ");
-	gets(username);
-	printf("pasword: ");
-	gets(pasword);
-	strcat(username,".user");	
-	FILE *fp;
-	fp = fopen(username,"r");
-	if(fopen(username,"r")==0)	
-	{
-		printf("we haven't this user name\n");
-		continue;
-	}
-	else 
-	{
-		printf("salllllllaaaaaaaaam\n\n\n");
-		fscanf(fp,"%s %s %s %s %s",name2,username2,pasword2,sathedadstresi,tarikh);
-		printf("%s",tarikh);
-		printf("%s",pasword2);
-		if (strcmp(pasword, pasword2)==0)//pasword is right
+void login() {
+
+	while(1) {
+
+
+		printf("plese inter your username and pasword to login\nuser name: ");
+		gets(username);
+		printf("pasword: ");
+		gets(pasword);
+	/*	getpasword();
+		int i;
+		for(i=0;i<50;i++)
 		{
-			printf("\n\n\n%s      %s\n\n\n\n",tarikh,date);
-			if(strcmp(tarikh, date)==1)
-			{
-				puts("shoma vared shodid");
-				return;	
-				
-			}
-			else
-			{
-				puts("zamane estefade ye shoma tamam shode");
+			pasword[i] = inputpasword[i];
+		}
+	//	strcpy(pasword,inputpasword);
+		printf("\n\ninput pasword is :%s",pasword);
+	*/
+
+		//if admin
+		{
+
+			FILE * fadmin;//ponter to admin of app
+
+			fadmin = fopen ("modirdetail.txt", "r");
+			fscanf(fadmin,"%s %s %s ",name2,username2,pasword2);
+			if(strcmp(username2, username)==0 && strcmp(pasword, pasword2)==0) {
+				printf("hi %s admin\nWELCOME TO YOUR APP\n",name2);
+				fclose(fadmin);
+				sathedastresi[0] ='0';
 				return;
 			}
-			
-		}
-		else
-		{
-			puts("pasword ghalat ast");
+
+		}//end of admin
+
+
+		strcat(username,".user");
+		FILE *fp;
+		fp = fopen(username,"r");
+		if(fopen(username,"r")==0) {
+			printf("we haven't this user name\n");
 			continue;
+		} else {
+		    char temp[3];//baraye sathedastresi ke alaki begirimesh
+
+			fscanf(fp,"%s %s %s %s %s",name2,username2,pasword2,temp,tarikh);
+
+			if (strcmp(pasword, pasword2)==0) { //pasword is right
+
+				if(strcmp(tarikh, date)==1) {
+					puts("shoma vared shodid");
+					sathedastresi[0]='1';
+					return;
+
+				} else {
+					puts("zamane estefade ye shoma tamam shode\n");
+					continue;
+				}
+
+			} else {
+				puts("pasword ghalat ast");
+				continue;
+			}
 		}
-	}
-	
+
 	}
 }
-int main()
+void creatuser()
 {
-	tarikh();
-		
+    if(sathedastresi[0]!='0')
+    {
+        printf("just admin can create user\n");
+        return;
+    }
+	char name[50],username[50],pasword[50],sathedastresi[3],tarikh[50];
+	printf("plese inter name of new user:");
+	gets(name);
+	printf("plese inter username of new user:");
+	gets(username);
+	printf("plese inter pasword of new user:");
+	gets(pasword);
+	printf("plese time to end useing this user such as <2016.12.20>:");
+	gets(tarikh);
+        char filename[50];
+        strcpy(filename,username);
+		strcat(filename,".user");
+		FILE *fp;
+		fp = fopen(filename,"w");
+		fprintf(fp,"%s %s %s 1 %s", name,username,pasword,tarikh);
+		puts("new user created");
+		fclose(fp);
+
+}
+
+void switchuser_ifadmin()
+{
+	char un[50],pas3[50];
+	int i;
+	for(i=0;i<50;i++)
+	{
+		un[i] = comand[i+3];
+		if(un[i] == '\0')
+			break;
+	}
+
+	FILE * fadmin;//if admin login to admin
+	fadmin = fopen ("modirdetail.txt", "r");
+	fscanf(fadmin,"%s %s %s %s",name2,username2,pasword2,sathedastresi);
+	if(strcmp(username2, un)==0 )
+	{
+		printf("hi %s admin\nWELCOME TO YOUR APP\n",name2);
+		return;
+	 }	  //end of admin login to admin
+	strcat(un,".user");//if admin login to anotehet user
+	FILE *fp;
+	fp = fopen(un,"r");
+
+	if(fopen(un,"r")==0)
+    {
+		printf("we haven't this user name a%sa\n",username);
+		return;
+	}
+	char temp[3];//baraye sathedastresi
+	fscanf(fp,"%s %s %s %s %s",name2,username2,pasword2,temp,tarikh);
+	if(strcmp(tarikh, date)==1)
+	 {
+		puts("shoma vared shodid");
+		return;
+	 }
+	 else
+	 {
+		puts("zamane estefade ye shoma tamam shode");
+		return;
+	}
+}
+
+
+void swintchuser_ifnotadmin()
+{
+    	char un[50],pas3[50],fname[50],fusername[50],fsathedastresi[3],fpasword[50],ftarikh[20];
+	int i;
+	for(i=0;i<50;i++)
+	{
+		un[i] = comand[i+3];
+		if(un[i] == '\0')
+			break;
+	}
+
+	FILE * fadmin;//if custom login to admin
+	fadmin = fopen ("modirdetail.txt", "r");
+	fscanf(fadmin,"%s %s %s %s",fname,fusername,fpasword,fsathedastresi);
+	if(strcmp(fusername, un)==0 )
+	{
+	    printf("plese inter the pasword:");
+        gets(pas3);
+        if(strcmp(fpasword, pas3)!=0 )//pasword is wrong
+        {
+            printf("pasword is wrong!\n");
+            return;
+        }
+		printf("hi %s admin\nWELCOME TO YOUR APP\n",fname);
+        sathedastresi[0] = '0';
+        strnull(name);strnull(username);strnull(pasword);
+
+        strcpy(name,fname);strcpy(username,fusername);strcpy(pasword,fpasword);
+		return;
+	 }	  //end custom login to admin
+
+	 //if custom login to another custom
+	 char filename1[50];
+	 strcpy(filename1,un);
+        strcat(filename1,".user");
+		FILE *fp;
+		fp = fopen(filename1,"r");
+		if(fopen(filename1,"r")==0)
+        {
+			printf("we haven't this user name\n");
+			return;
+		}
+		fscanf(fp,"%s %s %s %s %s",fname,fusername,fpasword,fsathedastresi,ftarikh);
+		printf("plese get the pasword:");
+        gets(pas3);
+        if(strcmp(pasword2, pas3)!=0 )//pasword is wrong
+        {
+            printf("pasword is wrong!");
+            return;
+        }
+        //tarikh
+        if(strcmp(tarikh, date)==1)
+        {
+            puts("shoma vared shodid");
+            return;
+		}
+		else
+        {
+            puts("zamane estefade ye shoma tamam shode");
+            return;
+        }
+
+}
+
+
+void switchuser()
+{
+	if(sathedastresi[0] == '0')
+		switchuser_ifadmin();
+	else
+        swintchuser_ifnotadmin();
+}
+
+
+void comandfunc()
+{
+	while(1)
+	{
+	printf("inter your comand:");
+	gets(comand);
+	if(comand[0]=='s'&&comand[1]=='u')
+		switchuser();
+	if(strcmp(comand,"create user")==0)
+		creatuser();
+
+
+
+
+	}
+
+
+
+
+
+}
+
+
+
+
+
+int main() {
+
+	tarikhfunc();
 	makeadmin();
 	login();
-	
+	comandfunc();
 
-	
+
 	return 0;
 }
 
