@@ -32,7 +32,18 @@ void tarikhfunc(){
 
 }
 
-
+void strreplace(char str[],char a,char b)
+{
+    int i;
+    for(i=0;str[i]!='\0';i++)
+    {
+        if(str[i]== a)
+        {
+            str[i]=b;
+        }
+    }
+    str[i]='\0';
+}
 
 
 void makeadmin() {
@@ -41,6 +52,7 @@ void makeadmin() {
 		printf("the program run in first time\nand have no admin\nPLESE inter admin name: ");
 		char name[50],username[50],pasword[50];
 		gets(name);
+		strreplace(name,' ','_');
 		printf("plese inter admin user name: ");
 		gets(username);
 		printf("plese inter admin pasword: ");
@@ -82,6 +94,7 @@ void login() {
 
 			fadmin = fopen ("modirdetail.txt", "r");
 			fscanf(fadmin,"%s %s %s ",name2,username2,pasword2);
+			strreplace(name2,'_',' ');
 			if(strcmp(username2, username)==0 )
             {
                 if( strcmp(pasword, pasword2)==0)
@@ -112,7 +125,7 @@ void login() {
 		    char temp[3];//baraye sathedastresi ke alaki begirimesh
 
 			fscanf(fp,"%s %s %s %s %s",name2,username2,pasword2,temp,tarikh);
-
+            strreplace(name2,'_',' ');
 			if (strcmp(pasword, pasword2)==0) { //pasword is right
 
 				if(strcmp(tarikh, date)==1) {
@@ -143,6 +156,7 @@ void creatuser()
 	char name[50],username[50],pasword[50],sathedastresi[3],tarikh[50];
 	printf("plese inter name of new user:");
 	gets(name);
+	strreplace(name,' ','_');
 	printf("plese inter username of new user:");
 	gets(username);
 	printf("plese inter pasword of new user:");
@@ -174,6 +188,7 @@ void switchuser_ifadmin()
 	FILE * fadmin;//if admin login to admin
 	fadmin = fopen ("modirdetail.txt", "r");
 	fscanf(fadmin,"%s %s %s %s",name2,username2,pasword2,sathedastresi);
+	strreplace(name2,'_',' ');
 	if(strcmp(username2, un)==0 )
 	{
 		printf("hi %s admin\nWELCOME TO YOUR APP\n",name2);
@@ -190,6 +205,7 @@ void switchuser_ifadmin()
 	}
 	char temp[3];//baraye sathedastresi
 	fscanf(fp,"%s %s %s %s %s",name2,username2,pasword2,temp,tarikh);
+	strreplace(name2,'_',' ');
 	if(strcmp(tarikh, date)==1)
 	 {
 		puts("shoma vared shodid");
@@ -218,6 +234,7 @@ void swintchuser_ifnotadmin()
 	FILE * fadmin;//if custom login to admin
 	fadmin = fopen ("modirdetail.txt", "r");
 	fscanf(fadmin,"%s %s %s %s",fname,fusername,fpasword,fsathedastresi);
+	strreplace(fname,'_',' ');
 	if(strcmp(fusername, un)==0 )
 	{
 	    printf("plese inter the pasword:");
@@ -231,7 +248,7 @@ void swintchuser_ifnotadmin()
         sathedastresi[0] = '0';
         strnull(name);strnull(username);strnull(pasword);
 
-        strcpy(name,fname);strcpy(username,fusername);strcpy(pasword,fpasword);
+        strcpy(name2,fname);strcpy(username,fusername);strcpy(pasword,fpasword);
 		return;
 	 }	  //end custom login to admin
 
@@ -247,6 +264,7 @@ void swintchuser_ifnotadmin()
 			return;
 		}
 		fscanf(fp,"%s %s %s %s %s",fname,fusername,fpasword,fsathedastresi,ftarikh);
+		strreplace(fname,'_',' ');
 		printf("plese get the pasword:");
         gets(pas3);
         if(strcmp(pasword2, pas3)!=0 )//pasword is wrong
@@ -258,6 +276,8 @@ void swintchuser_ifnotadmin()
         if(strcmp(tarikh, date)==1)
         {
             puts("shoma vared shodid");
+            strnull(name2);
+            strcpy(name2,fname);
             return;
 		}
 		else
@@ -394,7 +414,7 @@ void comandfunc()
 	while(1)
 	{
 	strnull(comand);
-	printf("inter your comand:");
+	printf("%s inter your comand:",name2);
 	gets(comand);
 	if(comand[0]=='s'&&comand[1]=='u')
 	{
@@ -438,6 +458,7 @@ void comandfunc()
 
 int main() {
 
+
 	tarikhfunc();
 	makeadmin();
 	login();
@@ -446,4 +467,3 @@ int main() {
 
 	return 0;
 }
-
