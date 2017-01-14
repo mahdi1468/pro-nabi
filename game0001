@@ -1,0 +1,201 @@
+// animation.cpp
+// Created By: IT2.IR
+
+#include<stdio.h>
+#include <stdlib.h>
+
+#include <iostream>
+#include <windows.h>
+#include <conio.h>
+#include <time.h>
+using namespace std;
+ int xmashin=38,ymashin=20;
+void wait ( double seconds )
+{
+  clock_t endwait;
+  endwait = clock () + seconds * CLOCKS_PER_SEC ;
+  while (clock() < endwait) {}
+}
+
+void SetColor(int ForgC)
+{
+     WORD wColor;
+     HANDLE hStdOut = GetStdHandle(STD_OUTPUT_HANDLE);
+     CONSOLE_SCREEN_BUFFER_INFO csbi;
+     if(GetConsoleScreenBufferInfo(hStdOut, &csbi))
+     {
+          wColor = (csbi.wAttributes & 0xF0) + (ForgC & 0x0F);
+          SetConsoleTextAttribute(hStdOut, wColor);return;
+     }
+
+}
+void gotoxy(int x, int y){
+
+  COORD coord;
+  coord.X = x;
+  coord.Y = y;
+  SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+}
+void mashin(int x,int y)
+{
+   SetColor(12);//hashiye ha
+    gotoxy(x,y);
+    printf(" __\n");
+    gotoxy(x,y+1);
+    printf("/  \\\n");
+    gotoxy(x,y+2);
+    printf("[()]\n");
+    gotoxy(x,y+3);
+    printf("|^^|\n");
+
+
+}
+void m1(int x,int y)
+{
+   SetColor(13);//hashiye ha
+    gotoxy(x,y);
+    printf(" __");gotoxy(x,y+1);
+    printf("(  )");gotoxy(x,y+2);
+    printf("[()]");gotoxy(x,y+3);
+    printf("^^^^");
+
+
+}
+void m2(int x,int y)
+{
+   SetColor(14);//hashiye ha
+    gotoxy(x,y);
+    printf(" __");gotoxy(x,y+1);
+    printf("(  )");gotoxy(x,y+2);
+    printf("[()]");gotoxy(x,y+3);
+    printf("^^^^");
+
+
+}
+void m3(int x,int y)
+{
+   SetColor(15);//hashiye ha
+    gotoxy(x,y);
+    printf(" __");gotoxy(x,y+1);
+    printf("(  )");gotoxy(x,y+2);
+    printf("[()]");gotoxy(x,y+3);
+    printf("^^^^");
+
+
+}
+void m4(int x,int y)
+{
+   SetColor(16);//hashiye ha
+    gotoxy(x,y);
+    printf(" __");gotoxy(x,y+1);
+    printf("(  )");gotoxy(x,y+2);
+    printf("[()]");gotoxy(x,y+3);
+    printf("^^^^");
+
+
+}
+void hashiye()
+{
+
+
+
+    //loop thru top to bottom direction
+    SetColor(6);//hashiye ha
+    for(int a =1; a<20; a++){
+        gotoxy(49,a);
+        cout << "||";
+    }
+
+    //loop thru bottom to top direction
+        SetColor(6);
+      for(int a = 19; a>0; a--){
+
+        gotoxy(0,a);
+        cout << "||";
+    }
+
+
+}
+
+
+
+void show()
+{
+
+    mashin(38,20);
+    int sakhti=0,counter=0;
+    int ym1=0,ym2=0,ym5=0,ym3=0,ym4=0;
+    srand(time(NULL));
+
+
+
+    while(1)
+    {
+        counter++;
+        mashin(xmashin,ymashin);
+        hashiye();
+        int r;
+       r = rand() % 6 + 1;
+
+//mavane
+if(r==1)
+{
+    if(ym1<24)
+    m1(5,ym1);
+
+}
+
+
+        if(counter %12==0)
+            ym1+=1;
+
+        if(ym2<24)
+        m2(35,ym2);
+
+        if(counter %12==0)
+            ym2+=1;
+
+
+
+
+
+        int keyPress;
+        if(kbhit())
+        {
+      keyPress = getch();
+      if (keyPress == 75)
+         xmashin-=4;
+      else if (keyPress == 77)
+         xmashin+=4;
+
+        }
+      /*  if(getch()=='a')
+        {
+            xmashin--;
+        }
+
+        if(getch()=='d')
+        {
+            xmashin++;
+        }
+      */
+       wait(.01);
+        system("cls");
+
+    }
+
+}
+
+
+
+int main() {
+
+    system("cls"); //clear the screen
+    gotoxy(16,1); cout << "FISH ANIMATION";
+    gotoxy(5,2); cout << "By: IT2";
+    show();
+
+
+
+return 0;
+}
