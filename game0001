@@ -9,7 +9,7 @@
 #include <conio.h>
 #include <time.h>
 using namespace std;
- int xmashin=38,ymashin=20;
+ int xmashin=38,ymashin=20,speed=1,counter=300;
 void wait ( double seconds )
 {
   clock_t endwait;
@@ -40,16 +40,29 @@ void mashin(int x,int y)
 {
    SetColor(12);//hashiye ha
     gotoxy(x,y);
-    printf(" __\n");
+    printf(" ____");
     gotoxy(x,y+1);
-    printf("/  \\\n");
+    printf("/____\\");
     gotoxy(x,y+2);
-    printf("[()]\n");
+    printf("[_()_]");
     gotoxy(x,y+3);
-    printf("|^^|\n");
+    printf("| ^^ |");
+if(speed==4)
+{
 
+     gotoxy(x,y+3);
+    printf("|    |");
+    SetColor(14);
+     gotoxy(x+2,y+3);
+    printf(";;");
+    gotoxy(70,11);
+    printf("NITRO   4X SPEED");
+}
 
 }
+void lose();
+
+
 void m1(int x,int y)
 {
    SetColor(13);//hashiye ha
@@ -58,8 +71,10 @@ void m1(int x,int y)
     printf("(  )");gotoxy(x,y+2);
     printf("[()]");gotoxy(x,y+3);
     printf("^^^^");
-
-
+    if(y>16&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<5)||(xmashin-x<5)&&(xmashin-x>0))
+        {lose();
+        }
 }
 void m2(int x,int y)
 {
@@ -69,8 +84,10 @@ void m2(int x,int y)
     printf("(  )");gotoxy(x,y+2);
     printf("[()]");gotoxy(x,y+3);
     printf("^^^^");
-
-
+if(y>16&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<5)||(xmashin-x<5)&&(xmashin-x>0))
+        {lose();
+        }
 }
 void m3(int x,int y)
 {
@@ -80,20 +97,126 @@ void m3(int x,int y)
     printf("(  )");gotoxy(x,y+2);
     printf("[()]");gotoxy(x,y+3);
     printf("^^^^");
-
+    if(y>16&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<5)||(xmashin-x<5)&&(xmashin-x>0))
+        {lose();
+        }
 
 }
 void m4(int x,int y)
 {
-   SetColor(16);//hashiye ha
+   SetColor(10);//hashiye ha
     gotoxy(x,y);
     printf(" __");gotoxy(x,y+1);
     printf("(  )");gotoxy(x,y+2);
     printf("[()]");gotoxy(x,y+3);
     printf("^^^^");
-
+    if(y>16&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<5)||(xmashin-x<5)&&(xmashin-x>0))
+        {lose();
+        }
 
 }
+void m5(int x,int y)
+{
+   SetColor(11);//hashiye ha
+    gotoxy(x,y);
+    printf(" __");gotoxy(x,y+1);
+    printf("(  )");gotoxy(x,y+2);
+    printf("[()]");gotoxy(x,y+3);
+    printf("^^^^");
+    if(y>16&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<5)||(xmashin-x<5)&&(xmashin-x>0))
+        {lose();
+        }
+
+}
+void m6(int x,int y)
+{
+   SetColor(12);//hashiye ha
+    gotoxy(x,y);
+    printf(" __");gotoxy(x,y+1);
+    printf("(  )");gotoxy(x,y+2);
+    printf("[()]");gotoxy(x,y+3);
+    printf("^^^^");
+    if(y>16&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<5)||(xmashin-x<5)&&(xmashin-x>0))
+        {lose();
+        }
+
+}
+
+void kamion1(int x,int y)
+{
+   SetColor(13);//hashiye ha
+    gotoxy(x,y);
+    printf("   ___");gotoxy(x,y+1);
+    printf("  / - \\");gotoxy(x,y+2);
+    printf(" /_____\\");gotoxy(x,y+3);
+    printf("___| |___");gotoxy(x,y+4);
+    printf("|        |");gotoxy(x,y+5);
+    printf("| M T N  |");gotoxy(x,y+6);
+    printf("|        |");gotoxy(x,y+7);
+    printf("|________|");
+    if(y>12&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<6)||(xmashin-x<8)&&(xmashin-x>0))
+        {lose();
+        }
+
+}
+void kamion2(int x,int y)
+{
+   SetColor(13);//hashiye ha
+    gotoxy(x,y);
+    printf("   ___");gotoxy(x,y+1);
+    printf("  / - \\");gotoxy(x,y+2);
+    printf(" /_____\\");gotoxy(x,y+3);
+    printf(" __| |__");gotoxy(x,y+4);
+    printf("|       |");gotoxy(x,y+5);
+    printf("|   0   |");gotoxy(x,y+6);
+    printf("|       |");gotoxy(x,y+7);
+    printf("|   O   |");gotoxy(x,y+8);
+    printf("|       |");gotoxy(x,y+9);
+    printf("|   O   |");gotoxy(x,y+10);
+    printf("|       |");gotoxy(x,y+11);
+    printf("|   IR  |");gotoxy(x,y+12);
+    printf("|_______|");
+    if(y>7&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<6)||(xmashin-x<8)&&(xmashin-x>0))
+        {lose();
+        }
+
+}
+void motor1(int x,int y)
+{
+   SetColor(14);//hashiye ha
+    gotoxy(x,y);
+    printf(" ()");gotoxy(x,y+1);
+    printf(" [X] ");gotoxy(x,y+2);
+    printf(" ()");gotoxy(x,y+3);
+
+    if(y>17&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<3)||(xmashin-x<3)&&(xmashin-x>0))
+        {lose();
+        }
+
+}
+
+void motor2(int x,int y)
+{
+   SetColor(12);//hashiye ha
+    gotoxy(x,y);
+    printf(" ()");gotoxy(x,y+1);
+    printf(" [X] ");gotoxy(x,y+2);
+    printf(" ()");gotoxy(x,y+3);
+
+    if(y>17&&y<=23)
+       if((x-xmashin>0)&&(x-xmashin<3)||(xmashin-x<3)&&(xmashin-x>0))
+        {lose();
+        }
+
+}
+
 void hashiye()
 {
 
@@ -117,16 +240,25 @@ void hashiye()
 
 }
 
-
+void puse()
+{
+    gotoxy(70,20);
+    SetColor(13);
+    printf("GAME PUSE");
+    gotoxy(70,21);
+    printf("for continue press <s>");
+    wait(2);
+    while(getch()!='s');
+}
 
 void show()
 {
 
     mashin(38,20);
-    int sakhti=0,counter=0;
-    int ym1=0,ym2=0,ym5=0,ym3=0,ym4=0;
+    int sakhti=0;
+    int ym1=0,ym2=0,ym5=0,ym3=0,ym4=0,ym6=0,ymotor1=0,ymotor2=0,ykamion1=0,ykamion2=0;
     srand(time(NULL));
-
+    int r=0;
 
 
     while(1)
@@ -134,26 +266,306 @@ void show()
         counter++;
         mashin(xmashin,ymashin);
         hashiye();
-        int r;
-       r = rand() % 6 + 1;
+
+
+        if(counter>1920)
+        {
+            if(counter %320==0)//male randome
+          {
+              r = rand() % 6 + 1;
+
+              ym1=ym2=ym3=ym4=ym5=ym6=ymotor1=ymotor2=ykamion1=ykamion2=0;
+          }
+        }
+        else
+        {
+            if(counter %320==0)//male randome
+          {
+              r++;
+
+              ym1=ym2=ym3=ym4=ym5=ym6=ymotor1=ymotor2=ykamion1=ykamion2=0;
+          }
+
+        }
+
 
 //mavane
-if(r==1)
+if(r==1)//noe 1
 {
     if(ym1<24)
     m1(5,ym1);
 
+    if(counter %7==0)
+        ym1+=speed;
+         if(ymotor1<24)
+    motor1(35,ymotor1);
+
+    if(counter %10==0)
+        ymotor1+=speed;
+
+
+         if(ykamion1<20)
+    {
+        kamion1(20,ykamion1);
+
+        if(counter %6==0)
+            ykamion1+=speed;
+    }
+
+
 }
 
-
-        if(counter %12==0)
-            ym1+=1;
-
-        if(ym2<24)
+if(r==2)
+{
+    if(ym2<25)
+    {
         m2(35,ym2);
 
         if(counter %12==0)
-            ym2+=1;
+            ym2+=speed;
+    }
+
+
+
+    if(ym3<25)
+    {
+        m3(25,ym3+2);
+
+        if(counter %15==0)
+            ym3+=speed;
+
+    }
+
+
+        if(ym4<25)
+        {
+            m4(20,ym4+1);
+
+        if(counter %8==0)
+            ym4+=speed;
+        }
+
+
+
+}
+if(r==3)
+{
+    if(ym5<25)
+    {
+        m5(2,ym5);
+
+        if(counter %10==0)
+            ym5+=1;
+    }
+
+
+
+    if(ym4<25)
+    {
+        m4(21,ym4+2);
+
+        if(counter %9==0)
+            ym4+=1;
+
+    }
+
+
+        if(ym1<25)
+        {
+            m1(32,ym1+1);
+
+        if(counter %16==0)
+            ym1+=speed;
+        }
+
+
+   if(ym2<25)
+        {
+            m2(25,ym2+1);
+
+        if(counter %6==0)
+            ym2+=speed;
+        }
+
+   if(ym6<25)
+        {
+            m6(40,ym6+1);
+
+        if(counter %12==0)
+            ym6+=speed;
+        }
+
+}
+if(r==4)
+{
+    if(ym2<25)
+    {
+        m2(40,ym2);
+
+        if(counter %15==0)
+            ym2+=speed;
+    }
+
+
+
+    if(ym4<25)
+    {
+        m4(4,ym4+2);
+
+        if(counter %6==0)
+            ym4+=speed;
+
+    }
+
+
+        if(ym1<25)
+        {
+            m1(12,ym1+1);
+
+        if(counter %10==0)
+            ym1+=speed;
+        }
+
+
+   if(ym3<25)
+        {
+            m3(25,ym3+1);
+
+        if(counter %12==0)
+            ym3+=speed;
+        }
+
+   if(ym4<25)
+        {
+            m4(30,ym4+1);
+
+        if(counter %8==0)
+            ym4+=speed;
+        }
+           if(ym6<25)
+        {
+            m6(35,ym6+1);
+
+        if(counter %7==0)
+            ym6+=speed;
+        }
+
+
+}
+if(r==5)
+{
+    if(ym6<25)
+    {
+        m6(4,ym6);
+
+        if(counter %8==0)
+            ym6+=speed;
+    }
+
+
+
+    if(ym2<25)
+    {
+        m2(12,ym2+2);
+
+        if(counter %6==0)
+            ym2+=speed;
+
+    }
+
+
+        if(ym1<25)
+        {
+            m1(21,ym1+1);
+
+        if(counter %12==0)
+            ym1+=speed;
+        }
+
+
+        if(ym3<25)
+        {
+            m3(27,ym3+1);
+
+        if(counter %6==0)
+            ym3+=speed;
+        }
+
+   if(ym4<25)
+        {
+            m4(33,ym4+1);
+
+        if(counter %11==0)
+            ym4+=speed;
+        }
+           if(ym5<25)
+        {
+            m5(40,ym5+1);
+
+        if(counter %11==0)
+            ym5+=speed;
+        }
+
+
+}
+
+if(r==6)
+{
+    if(ykamion2<18)
+    {
+        kamion2(15,ykamion2);
+
+        if(counter %8==0)
+            ykamion2+=speed;
+    }
+
+
+
+    if(ymotor2<25)
+    {
+        motor2(5,ymotor2+2);
+
+        if(counter %10==0)
+            ymotor2+=speed;
+
+    }
+
+
+        if(ym1<25)
+        {
+            m1(24,ym1+1);
+
+        if(counter %8==0)
+            ym1+=speed;
+        }
+
+
+        if(ym5<25)
+        {
+            m5(30,ym5+1);
+
+        if(counter %6==0)
+            ym5+=speed;
+        }
+
+   if(ym2<25)
+        {
+            m2(34,ym2+1);
+
+        if(counter %11==0)
+            ym2+=speed;
+        }
+           if(ym6<25)
+        {
+            m6(40,ym6+1);
+
+        if(counter %11==0)
+            ym6+=speed;
+        }
+
+
+}
+
 
 
 
@@ -163,11 +575,23 @@ if(r==1)
         if(kbhit())
         {
       keyPress = getch();
-      if (keyPress == 75)
+         if (keyPress == 's'||keyPress == 'S')
+         {
+             puse();
+             printf("game start for a sec next");
+             wait(1);
+             keyPress ='\0';
+         }
+      if (keyPress == 75&&xmashin>4)
          xmashin-=4;
-      else if (keyPress == 77)
+      else if (keyPress == 77&&xmashin<42)
          xmashin+=4;
-
+        if(keyPress == 72)
+        {
+           speed=4;
+        }
+        else
+            speed =1;
         }
       /*  if(getch()=='a')
         {
@@ -179,7 +603,12 @@ if(r==1)
             xmashin++;
         }
       */
-       wait(.01);
+    SetColor(14);
+
+      gotoxy(60,20);
+      printf("emtiyaz :%d  ",counter);
+
+            wait(.01);
         system("cls");
 
     }
@@ -189,13 +618,27 @@ if(r==1)
 
 
 int main() {
-
+system("cls");
+SetColor(10);
+printf("HI WELCOME TO CAR GAME\nfor control car use left or right arrow key\nand for speed up use up arrow key\nand for puse game press <s>\nare u ready? so press <s> to start game\nhave fun:)))");
+while(getch()!='s');
     system("cls"); //clear the screen
-    gotoxy(16,1); cout << "FISH ANIMATION";
-    gotoxy(5,2); cout << "By: IT2";
+
     show();
 
 
 
 return 0;
+}
+void lose()
+{
+
+    gotoxy(70,20);
+    SetColor(11);
+    printf("YOU LOSE emtiaz: %d\n",counter);
+    wait(2);
+    gotoxy(70,21);
+    printf("for play again press <s> \n");
+    while(getch()!='s');
+   main();
 }
